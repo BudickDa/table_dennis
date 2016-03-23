@@ -1,0 +1,98 @@
+<head>
+    <title>Table Dennis</title>
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<div id="balken"></div>
+<nav>
+    <div class="pull-right">
+        {{> loginButtons align="right"}}
+    </div>
+</nav>
+<main class="container-fluid">
+    <div class="row">
+        <h1 class="typewriter"></h1>
+        {{> table}}
+    </div>
+    {{#if currentUser}}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="list-group">
+                    {{#each queque}}
+                        <div class="list-group-item">
+                            <h2 class="list-group-item-heading">{{pointA}} : {{pointB}}</h2>
+                            <button data-_id="{{_id}}" class="confirm">Bestätigen</button>
+                            <button data-_id="{{_id}}" class="delete">Löschen</button>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <form id="points" class="form-inline">
+                    <div class="form-group">
+                        <select id="user-dropdown" class="form-control">
+                            {{#each userDropdown}}
+                                <option value="{{this._id}}">{{this.username}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="pointA" placeholder="Deine Punkte">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" id="pointB" placeholder="Punkte es Gegners">
+                    </div>
+                    <button type="submit" id="save" class="btn btn-default">Speichern</button>
+                </form>
+            </div>
+        </div>
+    {{/if}}
+
+</main>
+
+
+<script>
+    var string = ['T', 'a', 'b', 'l', 'e', ' ', 'D', 'e', 'n', 'n', 'i', 's', '!'],
+            element = $('.typewriter');
+    (function setLetter(i) {
+        element.text(element.text().replace('_', ''));
+        element.append(string[i] + '_');
+        if (i < string.length) {
+            i++;
+            setTimeout(function () {
+                setLetter(i)
+            }, 200)
+        } else {
+            element.text('Table Dennis!')
+        }
+    })(0);
+</script>
+</body>
+
+<template name="table">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Punkte</th>
+            <th>Gewonnen/Unentschieden/Verloren</th>
+        </tr>
+        </thead>
+        {{#each users}}
+            {{>row}}
+        {{/each}}
+    </table>
+</template>
+
+<template name="row">
+    <tr>
+        <td>{{nr}}</td>
+        <td>{{username}}</td>
+        <td>{{points}}</td>
+        <td>{{won}}/{{ties}}/{{lost}}</td>
+    </tr>
+</template>

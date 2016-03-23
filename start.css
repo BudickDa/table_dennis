@@ -1,0 +1,21 @@
+/* CSS declarations go here */
+body{
+    background-color: #4CAF50;
+    font-family: 'Inconsolata';
+}
+nav{
+    width: 90vw;
+}
+
+#balken{
+    background-color: #FF5722;
+    height: 100vh;
+    width: 80px;
+    position: absolute;
+    right: 0;
+    top:0;
+}
+
+h1{
+    font-weight: bold;
+}
